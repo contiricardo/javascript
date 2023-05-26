@@ -35,6 +35,7 @@ class producto {
     cambiarPrecio(nvoPrecio){
         this.precio = parseFloat(nvoPrecio)
     }
+    
 }
 
 class carrito {
@@ -83,11 +84,15 @@ const buscarPorCodigo = (arr, filtro) => {
 
 
 // Función filtro
-
-// const filtrar = (arr, filtro, params) => {
-//     return arr.filter((el) => {
-//     })
-// }    
+function filtrar(arr, params, filtro) {
+  return arr.filter((el) => {
+    if (params === "codigo") {
+        return el.codigo == filtro;
+    } else if (params === "nombre") {
+        return el[params].includes(filtro);
+    }
+  });
+}
 
 
 // Visualización del carrito, combinado con el precio
@@ -100,7 +105,6 @@ const verCarrito = (arr)=>{
         let valor = listCarrito.cantidad * bPrecio.precio
         total += valor
         res += `${listCarrito.codigo} | ${listCarrito.cantidad} | ${valor} \n`
-        
     }
     console.log(res)
     console.log(total)
@@ -110,16 +114,35 @@ const verCarrito = (arr)=>{
 // Función de selección de producto.
 function cargarProductos (){
     let seguir
-    
+    let vecFiltro
+    let vFiltrar
     do{
-        productoSeleccionado = parseInt(prompt("Seleccione el/los producto/s que desea comprar \n " + listarArray(vProductos)));
+        vecFiltro = vProductos
+        vFiltrar = parseInt(prompt("Desea filtrar los prodcutos? \n 1- Por código \n 2- Por nombre \n 3- Por mayor precio \n 4- por menor precio \n 0- Ver todos."));
+        
+        if (vFiltrar == 1) {
+            let filtro = parseInt(prompt("Ingrese el código del producto."));
+            vecFiltro = filtrar(vProductos, "codigo", filtro)
+        } else if (vFiltrar == 2){
+            let filtro = parseInt(prompt("Ingrese el nombre del producto."));
+            //console.log(filtrar(vecFiltro, "nombre", filtro))
+            vecFiltro = filtrar(vProductos, "nombre", filtro)
+        }else if (vFiltrar == 3){
+            vecFiltro = vProductos.sort(((a, b) => b.precio - a.precio))
+            console.log(listarArray(vecFiltro))
+        }else if (vFiltrar == 4){
+            vecFiltro = vProductos.sort(((a, b) => a.precio - b.precio))
+            console.log(listarArray(vecFiltro))
+        }
+
+        //productoSeleccionado = parseInt(prompt("Seleccione el/los producto/s que desea comprar \n " + listarArray(vProductos)));
+        productoSeleccionado = parseInt(prompt("Seleccione el/los producto/s que desea comprar \n " + listarArray(vecFiltro)));
         cantidadProducto = parseInt(prompt("Ingrese la cantidad de productos a comprar \n "));
 
-        //let encontrado = buscarPorCodigo(vCarrito, productoSeleccionado)
-        let encontrado = vCarrito.some((el) => el.codigo === productoSeleccionado)
-        
-        if (encontrado){
-            vCarrito.agregar(cantidadProducto)
+        let encontrado = buscarPorCodigo(vCarrito, productoSeleccionado)
+        //let encontrado = vCarrito.some((el) => el.codigo === productoSeleccionado)
+        if (encontrado != undefined){
+            encontrado.agregar(cantidadProducto)
         }else {
             vCarrito.push(new carrito(productoSeleccionado, cantidadProducto))
         }
