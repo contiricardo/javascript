@@ -12,7 +12,7 @@ let claveFija = "1234"
 class producto {
     constructor(nombre, detalle, stock, precio){
         this.codigo = parseInt(vProductos.length + 1);
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
         this.detalle = detalle;
         this.stock = stock;
         this.precio = precio;
@@ -52,21 +52,20 @@ class carrito {
 }
 
 // Carga inicial de productos
-vProductos.push(new producto('Vela madera 35mm', 'vela en cuenco de madera de 35mm de diametro.', 40, 2500))
-vProductos.push(new producto('Vela madera 50mm', 'vela en cuenco de madera de 50mm de diametro.', 50, 3300))
-vProductos.push(new producto('Vela madera 80mm', 'vela en cuenco de madera de 80mm de diametro.', 25, 3900))
-vProductos.push(new producto('Vela madera 95mm', 'vela en cuenco de madera de 95mm de diametro.', 33, 4500))
-vProductos.push(new producto('Vela madera 110mm','vela en cuenco de madera de 110mm de diametro.',10, 5200))
-vProductos.push(new producto('Vela lata 35mm',   'vela en cuenco de lata de 80mm de diametro.',   22, 2800))
-vProductos.push(new producto('Vela lata 50mm',   'vela en cuenco de lata de 50mm de diametro.',   37, 3500))
-vProductos.push(new producto('Vela lata 80mm',   'vela en cuenco de lata de 80mm de diametro.',   48, 4200))
-vProductos.push(new producto('Vela lata 95mm',   'vela en cuenco de lata de 50mm de diametro.',   25, 5100))
-vProductos.push(new producto('Vela lata 110mm',  'vela en cuenco de lata de 110mm de diametro.',  33, 5800))
-vProductos.push(new producto('Vela vidrio 35mm', 'vela en cuenco de vidrio de 35mm de diametro.', 60, 3100))
-vProductos.push(new producto('Vela vidrio 50mm', 'vela en cuenco de vidrio de 50mm de diametro.', 80, 3500))
-vProductos.push(new producto('Vela vidrio 80mm', 'vela en cuenco de vidrio de 80mm de diametro.', 50, 4200))
-vProductos.push(new producto('Vela vidrio 95mm', 'vela en cuenco de vidrio de 95mm de diametro.', 10, 5300))
-vProductos.push(new producto('Vela vidrio 110mm','vela en cuenco de vidrio de 110mm de diametro.', 5, 6500))
+vProductos.push(new producto("Vela madera 35mm", 'vela en cuenco de madera de 35mm de diametro.', 40, 2500))
+vProductos.push(new producto("Vela madera 50mm", 'vela en cuenco de madera de 50mm de diametro.', 50, 3300))
+vProductos.push(new producto("Vela madera 80mm", 'vela en cuenco de madera de 80mm de diametro.', 25, 3900))
+vProductos.push(new producto("Vela madera 95mm", 'vela en cuenco de madera de 95mm de diametro.', 33, 4500))
+vProductos.push(new producto("Vela madera 110mm",'vela en cuenco de madera de 110mm de diametro.',10, 5200))
+vProductos.push(new producto("Vela lata 35mm",   'vela en cuenco de lata de 50mm de diametro.',   37, 3500))
+vProductos.push(new producto("Vela lata 80mm",   'vela en cuenco de lata de 80mm de diametro.',   48, 4200))
+vProductos.push(new producto("Vela lata 95mm",   'vela en cuenco de lata de 50mm de diametro.',   25, 5100))
+vProductos.push(new producto("Vela lata 110mm",  'vela en cuenco de lata de 110mm de diametro.',  33, 5800))
+vProductos.push(new producto("Vela vidrio 35mm", 'vela en cuenco de vidrio de 35mm de diametro.', 60, 3100))
+vProductos.push(new producto("Vela vidrio 50mm", 'vela en cuenco de vidrio de 50mm de diametro.', 80, 3500))
+vProductos.push(new producto("Vela vidrio 80mm", 'vela en cuenco de vidrio de 80mm de diametro.', 50, 4200))
+vProductos.push(new producto("Vela vidrio 95mm", 'vela en cuenco de vidrio de 95mm de diametro.', 10, 5300))
+vProductos.push(new producto("Vela vidrio 110mm",'vela en cuenco de vidrio de 110mm de diametro.', 5, 6500))
 
 // Listar productos.
 const listarArray = (arr) => {
@@ -81,7 +80,6 @@ const buscarPorCodigo = (arr, filtro) => {
     const val = arr.find((el) => el.codigo === filtro);
     return val;
 }
-
 
 // Función filtro
 function filtrar(arr, params, filtro) {
@@ -113,19 +111,16 @@ const verCarrito = (arr)=>{
 
 // Función de selección de producto.
 function cargarProductos (){
-    let seguir
-    let vecFiltro
-    let vFiltrar
+    let seguir, vecFiltro, vFiltrar, filtro
     do{
         vecFiltro = vProductos
         vFiltrar = parseInt(prompt("Desea filtrar los prodcutos? \n 1- Por código \n 2- Por nombre \n 3- Por mayor precio \n 4- por menor precio \n 0- Ver todos."));
         
         if (vFiltrar == 1) {
-            let filtro = parseInt(prompt("Ingrese el código del producto."));
-            vecFiltro = filtrar(vProductos, "codigo", filtro)
+            filtro = parseInt(prompt("Ingrese el código del producto."));
+            vecFiltro = filtrar(vProductos, "codigo", filtro);
         } else if (vFiltrar == 2){
-            let filtro = parseInt(prompt("Ingrese el nombre del producto."));
-            //console.log(filtrar(vecFiltro, "nombre", filtro))
+            filtro = prompt("Ingrese el nombre del producto a buscar.");
             vecFiltro = filtrar(vProductos, "nombre", filtro)
         }else if (vFiltrar == 3){
             vecFiltro = vProductos.sort(((a, b) => b.precio - a.precio))
@@ -164,7 +159,7 @@ function cargarProductos (){
 alert("Bienvenido a BeraDeco. \nSeleccione los productos luego ingrese su clave para comprar.")
 
 cargarProductos()
-
+//console.log(filtrar(vProductos, "MADERA", "nombre"));
 
 // Realización de la compra con clave
 hacerCompra = parseInt(prompt("Desea realizar la compra: \n 1. Comprar \n 2.Cancelar"))
