@@ -1,81 +1,249 @@
-'use strict'
-// Variables Globales
-const vProductos = []
-const vCarrito = []
+/*********************************
+*** Variables Globales
+*********************************/
+const arrProductos = []
 
+let arrCarrito = []
 let productoSeleccionado
 let cantidadProducto
 let hacerCompra
 let claveFija = "1234"
 
-/* Declaración de objetos */
-class producto {
-    constructor(nombre, detalle, stock, precio){
-        this.codigo = parseInt(vProductos.length + 1);
+/*********************************
+*** Componentes 
+*********************************/
+const divProductos = document.querySelector("#productos")
+const divCarrito = document.querySelector("#carrito")
+const search = document.querySelector("#search")
+const totalCarrito = document.querySelector("#total")
+
+/*********************************
+*** Declaración de objetos
+*********************************/
+class clsProducto {
+    constructor(nombre, detalle, stock, precio, img){
+        this.codigo = parseInt(arrProductos.length + 1);
         this.nombre = nombre.toUpperCase();
         this.detalle = detalle;
         this.stock = stock;
-        this.precio = precio;
+        //this.precio = precio;
+        this.precio = precio == "" || precio == 0 ? precio = 0 : precio;
+        //this.img = "img/" + img;
+        img == "" ? this.img = "https://via.placeholder.com/150" : this.img = "img/" + img;
     }
+
     verStock(){
-        return this.stock
+        return this.stock == 0 ? "Sin stock" : this.stock;
     }
-    restarStock(cant){
-        return this.stock -= cant
+    sumarStock(){
+        this.stock += 1;
     }
-    sumarStock(cant){
-        return this.stock += cant
+    restarStock(){
+        this.stock -= 1;
     }
-    cambiarNombre(nvoNombre){
-        this.nombre = nvoNombre
-    }
-    cambiarDetalle(nvoDetalle){
-        this.detalle = nvoDetalle
-    }
-    cambiarPrecio(nvoPrecio){
-        this.precio = parseFloat(nvoPrecio)
-    }
-    
 }
 
-class carrito {
+class clsCarrito {
     constructor(codigo, cantidad){
         this.codigo = parseInt(codigo);
         this.cantidad = parseInt(cantidad);
     }
-    quitar(cant){
-        return this.cantidad -= cant
+    quitar(){
+        let res = this.cantidad > 0 ? this.cantidad -= 1 : this.cantidad = 0
+        res == 0 && this.eliminar()
     }
-    agregar(cant){
-        return this.cantidad += cant
+    agregar(){
+        return this.cantidad += 1;
+    }
+    eliminar() {
+        const indice = arrCarrito.findIndex(prod => prod.codigo === this.codigo);
+        if (indice !== -1) {
+            arrCarrito.splice(indice, 1);
+            console.log(`El producto con código ${this.codigo} ha sido eliminado.`);
+        } else {
+            console.log("El producto no existe en la lista.");
+        }
     }
 }
 
-// Carga inicial de productos
-vProductos.push(new producto("Vela madera 35mm", 'vela en cuenco de madera de 35mm de diametro.', 40, 2500))
-vProductos.push(new producto("Vela madera 50mm", 'vela en cuenco de madera de 50mm de diametro.', 50, 3300))
-vProductos.push(new producto("Vela madera 80mm", 'vela en cuenco de madera de 80mm de diametro.', 25, 3900))
-vProductos.push(new producto("Vela madera 95mm", 'vela en cuenco de madera de 95mm de diametro.', 33, 4500))
-vProductos.push(new producto("Vela madera 110mm",'vela en cuenco de madera de 110mm de diametro.',10, 5200))
-vProductos.push(new producto("Vela lata 35mm",   'vela en cuenco de lata de 50mm de diametro.',   37, 3500))
-vProductos.push(new producto("Vela lata 80mm",   'vela en cuenco de lata de 80mm de diametro.',   48, 4200))
-vProductos.push(new producto("Vela lata 95mm",   'vela en cuenco de lata de 50mm de diametro.',   25, 5100))
-vProductos.push(new producto("Vela lata 110mm",  'vela en cuenco de lata de 110mm de diametro.',  33, 5800))
-vProductos.push(new producto("Vela vidrio 35mm", 'vela en cuenco de vidrio de 35mm de diametro.', 60, 3100))
-vProductos.push(new producto("Vela vidrio 50mm", 'vela en cuenco de vidrio de 50mm de diametro.', 80, 3500))
-vProductos.push(new producto("Vela vidrio 80mm", 'vela en cuenco de vidrio de 80mm de diametro.', 50, 4200))
-vProductos.push(new producto("Vela vidrio 95mm", 'vela en cuenco de vidrio de 95mm de diametro.', 10, 5300))
-vProductos.push(new producto("Vela vidrio 110mm",'vela en cuenco de vidrio de 110mm de diametro.', 5, 6500))
+/*********************************
+*** carga inicial
+*********************************/
+arrProductos.push(new clsProducto("Maceta diseño", 'Macetas de cemento con diseño', 40, 3200,"maceta_cemento_diseno.png"));
+arrProductos.push(new clsProducto("Maceta cemento", 'Macetas de cemento clásica', 50, 2500,"maceta_cemento.png"));
+arrProductos.push(new clsProducto("Vela madera 35mm", 'vela en cuenco de madera de 35mm de diametro.', 25, 3900,"vela_cuenco_madera_35mm.png"));
+arrProductos.push(new clsProducto("Vela lata 35mm",   'vela en cuenco de lata de 35mm de altura.',   37, 3500,"vela_lata_35mm.jpg"));
+arrProductos.push(new clsProducto("Vela lata 50mm",   'vela en cuenco de lata de 50mm de diametro.',   48, 4200,"vela_lata_50mm.png"));
+arrProductos.push(new clsProducto("Vela lata 60mm",  'vela en cuenco de lata de 60mm de diametro.',  33, 5800,"vela_lata_60mm.png"));
+arrProductos.push(new clsProducto("Vela vidrio redonda", 'vela en cuenco de vidrio redonda de 35mm de diametro.', 60, 3100,"vela_vidrio_redonda.jpeg"));
+arrProductos.push(new clsProducto("Vela vidrio madera", 'vela en cuenco de vidrio de 50mm de diametro con tapa de madera.', 80, 3500,"vela_vidrio_tapa.png"));
 
-// Listar productos.
-const listarArray = (arr) => {
-    let val = ""
-    for (const obj of arr){
-        val += `${obj.codigo} - Nombre producto ${obj.nombre}, precio: $ ${obj.precio} \n`
+
+
+/*********************************
+*** Funciones de productos
+*********************************/
+function renderProductos (arr){
+    divProductos.innerHTML = ""
+
+    arr.forEach((prd) => {
+        // Estructura
+        const miProd = document.createElement('div');
+        miProd.classList.add('card', 'col-sm-4');
+        // Caja
+        const miProdCardBody = document.createElement('div');
+        miProdCardBody.classList.add('card-body');
+        // Imagen
+        const miProdImagen = document.createElement('img');
+        miProdImagen.classList.add('img-fluid');
+        miProdImagen.setAttribute('src', prd.img);
+        // Titulo
+        const miProdTitle = document.createElement('h5');
+        miProdTitle.classList.add('card-title');
+        miProdTitle.textContent = prd.nombre;
+        // Precio
+        const miProdPrecio = document.createElement('p');
+        miProdPrecio.classList.add('card-text');
+        miProdPrecio.textContent = `$ ${prd.precio}`;
+        // Boton 
+        const miProdBoton = document.createElement('button');
+        miProdBoton.classList.add('btn', 'btn-primary');
+        miProdBoton.textContent = '+';
+        miProdBoton.setAttribute('marcador', prd.codigo);
+        miProdBoton.addEventListener('click', anyadirProductoAlCarrito);
+        // Insertamos
+        miProdCardBody.appendChild(miProdImagen);
+        miProdCardBody.appendChild(miProdTitle);
+        miProdCardBody.appendChild(miProdPrecio);
+        miProdCardBody.appendChild(miProdBoton);
+        miProd.appendChild(miProdCardBody);
+        divProductos.appendChild(miProd);
+    });
+}
+// Función para agregar productos al carrito
+function anyadirProductoAlCarrito(evento){
+    const newProdId = parseInt(evento.target.getAttribute('marcador'));
+
+    if (arrCarrito.length > 0){
+        let existe = arrCarrito.some((el)=>{
+            return el.codigo == newProdId;
+        });
+        if (existe){
+            let encontrado = arrCarrito.find((el) => {
+                return el.codigo == newProdId;
+            });
+            //encontrado.agregar();
+            encontrado.cantidad += 1
+        } else {
+            arrCarrito.push(new clsCarrito(newProdId, 1))
+        }
+    } else {
+        arrCarrito.push(new clsCarrito(newProdId, 1))
     }
-    return val
+    
+    // Actualizamos el carrito 
+    renderCarrito();
 }
 
+/*********************************
+*** Funciones del carrito
+*********************************/
+function renderCarrito () {
+    divCarrito.textContent = ""
+    
+    arrCarrito.forEach((carrito) => {
+        const miEstructura = document.createElement("div")
+        const prod = document.createElement("p")
+        prod.classList
+        prod.textContent = `${carrito.codigo} x ${carrito.cantidad}`
+
+        const quitarProd = document.createElement("button")
+        quitarProd.classList.add("btn", "btn-secondary")
+        quitarProd.textContent = "-"
+        quitarProd.setAttribute ("codigo", carrito.codigo)
+        quitarProd.addEventListener("click", quitarProducto)
+        
+        miEstructura.appendChild(prod)
+        miEstructura.appendChild(quitarProd)
+        divCarrito.appendChild(miEstructura);
+        
+        
+    })
+    guardarLS(arrCarrito)
+
+    if (arrCarrito.length>0){
+        const clearCarrito = document.createElement("button")
+        clearCarrito.classList.add("btn", "btn-primary")
+        clearCarrito.textContent = "X"
+        clearCarrito.addEventListener("click", vaciarCarrito)
+        divCarrito.appendChild(clearCarrito)
+    }
+    totalCarrito.textContent = calcularTotal();
+}
+
+function quitarProducto(evento){
+    let elementoAQuitar = parseInt(evento.target.getAttribute("codigo"))
+
+    let existe = arrCarrito.some((el) => el.codigo == elementoAQuitar)
+    if (existe){
+        let quitar = arrCarrito.find((el) => {
+            return el.codigo == elementoAQuitar
+        })
+        //quitar.quitar()
+        if (quitar.cantidad > 0){
+            quitar.cantidad -= 1
+        }
+        if (quitar.cantidad == 0) {
+            const indice = arrCarrito.findIndex(prod => prod.codigo === elementoAQuitar);
+            if (indice !== -1) {
+                arrCarrito.splice(indice, 1);
+                console.log(`El producto con código ${elementoAQuitar} ha sido eliminado.`);
+            }
+        }
+    }
+
+    renderCarrito()
+}
+
+
+// Vaciar el carrito
+function vaciarCarrito (){
+    arrCarrito.length = 0
+    
+    renderCarrito()
+}
+
+
+/**
+ * Calcula el precio total teniendo en cuenta los productos repetidos
+**/
+function calcularTotal() {
+    // Recorremos el array del carrito 
+    return arrCarrito.reduce((total, item) => {
+        // De cada elemento obtenemos su precio
+        const miItem = arrProductos.filter((prd) => {
+            console.log(item)
+            return prd.codigo === parseInt(item);
+        });
+        console.log(miItem.precio)
+        // Los sumamos al total
+        return total + miItem.precio;
+    }, 0).toFixed(2);
+}
+
+
+/**
+ * LocalStorage
+**/
+function guardarLS(arr) {
+    localStorage.setItem("carrito", JSON.stringify(arr));
+}
+
+ 
+
+/*********************************
+*** Filtros
+*********************************/
 const buscarPorCodigo = (arr, filtro) => {
     const val = arr.find((el) => el.codigo === filtro);
     return val;
@@ -87,77 +255,34 @@ function filtrar(arr, params, filtro) {
     if (params === "codigo") {
         return el.codigo == filtro;
     } else if (params === "nombre") {
-        return el[params].includes(filtro);
+        return el["nombre"].includes(filtro);
     }
   });
 }
 
 
-// Visualización del carrito, combinado con el precio
-const verCarrito = (arr)=>{
-    let res = ""
-    let total = 0
-    console.log("Código  |  Cantidad  |  Monto \n")
-    for (const listCarrito of arr){
-        let bPrecio = buscarPorCodigo(vProductos, listCarrito.codigo)
-        let valor = listCarrito.cantidad * bPrecio.precio
-        total += valor
-        res += `${listCarrito.codigo} | ${listCarrito.cantidad} | ${valor} \n`
-    }
-    console.log(res)
-    console.log(total)
+
+/*********************************
+*** Inicio de logica
+*********************************/
+//alert("Bienvenido a BeraDeco. \nSeleccione los productos luego ingrese su clave para comprar.")
+
+renderProductos(arrProductos)
+
+if(localStorage.getItem("carrito")){
+    arrCarrito = JSON.parse(localStorage.getItem("carrito"))
 }
 
+renderCarrito()
 
-// Función de selección de producto.
-function cargarProductos (){
-    let seguir, vecFiltro, vFiltrar, filtro
-    do{
-        vecFiltro = vProductos
-        vFiltrar = parseInt(prompt("Desea filtrar los prodcutos? \n 1- Por código \n 2- Por nombre \n 3- Por mayor precio \n 4- por menor precio \n 0- Ver todos."));
-        
-        if (vFiltrar == 1) {
-            filtro = parseInt(prompt("Ingrese el código del producto."));
-            vecFiltro = filtrar(vProductos, "codigo", filtro);
-        } else if (vFiltrar == 2){
-            filtro = prompt("Ingrese el nombre del producto a buscar.");
-            vecFiltro = filtrar(vProductos, "nombre", filtro)
-        }else if (vFiltrar == 3){
-            vecFiltro = vProductos.sort(((a, b) => b.precio - a.precio))
-            console.log(listarArray(vecFiltro))
-        }else if (vFiltrar == 4){
-            vecFiltro = vProductos.sort(((a, b) => a.precio - b.precio))
-            console.log(listarArray(vecFiltro))
-        }
-
-        //productoSeleccionado = parseInt(prompt("Seleccione el/los producto/s que desea comprar \n " + listarArray(vProductos)));
-        productoSeleccionado = parseInt(prompt("Seleccione el/los producto/s que desea comprar \n " + listarArray(vecFiltro)));
-        cantidadProducto = parseInt(prompt("Ingrese la cantidad de productos a comprar \n "));
-
-        let encontrado = buscarPorCodigo(vCarrito, productoSeleccionado)
-        //let encontrado = vCarrito.some((el) => el.codigo === productoSeleccionado)
-        if (encontrado != undefined){
-            encontrado.agregar(cantidadProducto)
-        }else {
-            vCarrito.push(new carrito(productoSeleccionado, cantidadProducto))
-        }
-        
-        let ver = parseInt(prompt("Desea ver el carrito de compras? \n 1- Ver carrito. \n 2- Continuar"))
-        
-        if (ver == 1) {
-            verCarrito(vCarrito)
-        }
+//Listeners de búsqueda
+search.addEventListener("input", () => {
+    let nuevoFiltro = filtrar(arrProductos, "nombre", search.value.toUpperCase())
+    renderProductos(nuevoFiltro)
+});
 
 
-        seguir = prompt('Desea elegir otro producto? S/N');
-    }while(seguir == 'S' || seguir == 's')
-}
-
-
-
-// Inicio del proceso
-alert("Bienvenido a BeraDeco. \nSeleccione los productos luego ingrese su clave para comprar.")
-
+/*
 cargarProductos()
 //console.log(filtrar(vProductos, "MADERA", "nombre"));
 
@@ -183,3 +308,4 @@ if (hacerCompra === 1) {
 }
 
 
+*/
