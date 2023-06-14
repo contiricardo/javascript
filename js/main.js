@@ -16,6 +16,8 @@ const divProductos = document.querySelector("#productos")
 const divCarrito = document.querySelector("#carrito")
 const search = document.querySelector("#search")
 const totalCarrito = document.querySelector("#total")
+const divCompra = document.querySelector("#compra")
+const btnComprar = document.createElement("button")
 
 /*********************************
 *** Declaración de objetos
@@ -150,12 +152,19 @@ function anyadirProductoAlCarrito(evento){
 *********************************/
 function renderCarrito () {
     divCarrito.textContent = ""
+    divCompra.textContent = ""
     
     arrCarrito.forEach((carrito) => {
+        let nombreObjeto;
+        let objNombre = arrProductos.find(obj => obj.codigo === carrito.codigo);
+        if (objNombre) {
+            nombreObjeto = objNombre.nombre;
+        }
+
         const miEstructura = document.createElement("div")
         const prod = document.createElement("p")
-        prod.classList
-        prod.textContent = `${carrito.codigo} x ${carrito.cantidad}`
+        //prod.classList.add()
+        prod.textContent = `${carrito.codigo} - ` + nombreObjeto + ` x ${carrito.cantidad}`
 
         const quitarProd = document.createElement("button")
         quitarProd.classList.add("btn", "btn-secondary")
@@ -173,12 +182,22 @@ function renderCarrito () {
 
     if (arrCarrito.length>0){
         const clearCarrito = document.createElement("button")
-        clearCarrito.classList.add("btn", "btn-primary")
+        clearCarrito.classList.add("btn", "btn-danger")
         clearCarrito.textContent = "X"
         clearCarrito.addEventListener("click", vaciarCarrito)
         divCarrito.appendChild(clearCarrito)
+        
+        //const btnComprar = document.createElement("button")
+        btnComprar.setAttribute("id","btnComprarSwal")
+        btnComprar.classList.add("btn", "btn-success")
+        btnComprar.textContent = "Realizar Compra"
+        btnComprar.addEventListener("click", realizarCompra)
+        divCompra.appendChild(btnComprar)
     }
+
     totalCarrito.textContent = calcularTotal();
+
+
 }
 
 function quitarProducto(evento){
@@ -229,6 +248,27 @@ function calcularTotal() {
     }, 0).toFixed(2);
 }
 
+
+/**
+ * Función de compra
+**/
+let realizarCompra = () => {
+    Swal.fire({
+        title: 'Seguro quieres finalizar la compra?',
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Confirmar',
+        denyButtonText: `Seguir comprando`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Serás redirigido a la pasarela de pagos!', '', 'success')
+          /* funcion que redirija */
+        } else if (result.isDenied) {
+          Swal.fire('Serás redirigido nuevamente al store!', '', 'warning')
+    /* redirigir al store */
+}})
+}
 
 /**
  * LocalStorage
@@ -304,6 +344,4 @@ if (hacerCompra === 1) {
 } else {
     alert("Compra cancelada")
 }
-
-
 */
