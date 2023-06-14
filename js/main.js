@@ -222,12 +222,10 @@ function calcularTotal() {
     return arrCarrito.reduce((total, item) => {
         // De cada elemento obtenemos su precio
         const miItem = arrProductos.filter((prd) => {
-            console.log(item)
-            return prd.codigo === parseInt(item);
+            return prd.codigo === parseInt(item.codigo);
         });
-        console.log(miItem.precio)
         // Los sumamos al total
-        return total + miItem.precio;
+        return total + (miItem[0].precio * item.cantidad);
     }, 0).toFixed(2);
 }
 
