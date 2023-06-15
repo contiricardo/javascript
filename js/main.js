@@ -91,7 +91,7 @@ function renderProductos (arr){
     arr.forEach((prd) => {
         // Estructura
         const miProd = document.createElement('div');
-        miProd.classList.add('card', 'col-sm-4');
+        miProd.classList.add('card', 'col-md-4', 'col-sm-6');
         // Caja
         const miProdCardBody = document.createElement('div');
         miProdCardBody.classList.add('card-body');
@@ -153,6 +153,7 @@ function anyadirProductoAlCarrito(evento){
 function renderCarrito () {
     divCarrito.textContent = ""
     divCompra.textContent = ""
+    totalCarrito.textContent = ""
     
     arrCarrito.forEach((carrito) => {
         let nombreObjeto;
@@ -161,18 +162,18 @@ function renderCarrito () {
             nombreObjeto = objNombre.nombre;
         }
 
-        const miEstructura = document.createElement("div")
-        const prod = document.createElement("p")
-        //prod.classList.add()
-        prod.textContent = `${carrito.codigo} - ` + nombreObjeto + ` x ${carrito.cantidad}`
+        const miEstructura = document.createElement("li")
+        miEstructura.classList.add('list-group-item', 'text-right', 'mx-2');
+        miEstructura.textContent = `${carrito.codigo} - ` + nombreObjeto + ` x ${carrito.cantidad}`
 
         const quitarProd = document.createElement("button")
-        quitarProd.classList.add("btn", "btn-secondary")
-        quitarProd.textContent = "-"
+        quitarProd.classList.add("btn", "btn-secondary", "mx-5")
+        quitarProd.textContent = " - "
+        quitarProd.style.marginLeft = '5px';
         quitarProd.setAttribute ("codigo", carrito.codigo)
         quitarProd.addEventListener("click", quitarProducto)
         
-        miEstructura.appendChild(prod)
+        //miEstructura.appendChild(prod)
         miEstructura.appendChild(quitarProd)
         divCarrito.appendChild(miEstructura);
         
@@ -182,8 +183,8 @@ function renderCarrito () {
 
     if (arrCarrito.length>0){
         const clearCarrito = document.createElement("button")
-        clearCarrito.classList.add("btn", "btn-danger")
-        clearCarrito.textContent = "X"
+        clearCarrito.classList.add("btn", "btn-danger", "m-2")
+        clearCarrito.textContent = "Vaciar carrito"
         clearCarrito.addEventListener("click", vaciarCarrito)
         divCarrito.appendChild(clearCarrito)
         
@@ -195,7 +196,7 @@ function renderCarrito () {
         divCompra.appendChild(btnComprar)
     }
 
-    totalCarrito.textContent = calcularTotal();
+    totalCarrito.textContent = calcularTotal()
 
 
 }
@@ -257,16 +258,14 @@ let realizarCompra = () => {
         title: 'Seguro quieres finalizar la compra?',
         showDenyButton: true,
         showCancelButton: false,
-        confirmButtonText: 'Confirmar',
-        denyButtonText: `Seguir comprando`,
+        confirmButtonText: 'Comprar',
+        denyButtonText: `Seguir eligiendo`,
       }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Serás redirigido a la pasarela de pagos!', '', 'success')
-          /* funcion que redirija */
+          Swal.fire('Su compra fue realizada con exito!', '', 'success')
+
         } else if (result.isDenied) {
-          Swal.fire('Serás redirigido nuevamente al store!', '', 'warning')
-    /* redirigir al store */
+          Swal.fire('Serás redirigido nuevamente a la tienda!', '', 'warning')
 }})
 }
 
