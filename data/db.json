@@ -1,0 +1,202 @@
+[
+    {
+        "codigo": 1,
+        "nombre": "Maceta diseño", 
+        "detalle": "Macetas de cemento con diseño", 
+        "stock": 40,
+        "precio": 3200,
+        "img": "./img/maceta_cemento_diseno.png"
+    },
+    {
+        "codigo": 2,
+        "nombre": "Maceta cemento", 
+        "detalle": "Macetas de cemento clásica", 
+        "stock": 50,
+        "precio": 2500,
+        "img": "./img/maceta_cemento.png"
+    },
+    {
+        "codigo": 3,
+        "nombre": "Vela madera 35mm", 
+        "detalle": "vela en cuenco de madera de 35mm de diametro.", 
+        "stock": 25,
+        "precio": 3900,
+        "img": "./img/vela_cuenco_madera_35mm.png"
+    },
+    {
+        "codigo": 4,
+        "nombre": "Vela lata 35mm",   
+        "detalle": "vela en cuenco de lata de 35mm de altura.", 
+        "stock":   37,
+        "precio": 3500,
+        "img": "./img/vela_lata_35mm.jpg"
+    },
+    {
+        "codigo": 5,
+        "nombre": "Vela lata 50mm",   
+        "detalle": "vela en cuenco de lata de 50mm de diametro.", 
+        "stock": 48,
+        "precio": 4200,
+        "img": "./img/vela_lata_50mm.png"
+    },
+    {
+        "codigo": 6,
+        "nombre": "Vela lata 60mm",  
+        "detalle": "vela en cuenco de lata de 60mm de diametro.", 
+        "stock": 33,
+        "precio": 5800,
+        "img": "./img/vela_lata_60mm.png"
+    },
+    {
+        "codigo": 7,
+        "nombre": "Vela vidrio redonda", 
+        "detalle": "vela en cuenco de vidrio redonda de 35mm de diametro.", 
+        "stock": 60,
+        "precio": 3100,
+        "img": "./img/vela_vidrio_redonda.jpeg"
+    },
+    {
+        "codigo": 8,
+        "nombre": "Vela vidrio madera", 
+        "detalle": "vela en cuenco de vidrio de 50mm de diametro con tapa de madera.", 
+        "stock": 80,
+        "precio": 3500,
+        "img": "./img/vela_vidrio_tapa.png"
+    },
+    {
+        "codigo": 9,
+        "nombre": "Producto 9", 
+        "detalle": "Detalle producto 9", 
+        "stock": 8,
+        "precio": 2500,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 10,
+        "nombre": "Producto 10", 
+        "detalle": "Detalle producto 10", 
+        "stock": 8,
+        "precio": 3100,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 11,
+        "nombre": "Producto 11", 
+        "detalle": "Detalle producto 11", 
+        "stock": 11,
+        "precio": 1200,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 12,
+        "nombre": "Producto 12", 
+        "detalle": "Detalle producto 12", 
+        "stock": 14,
+        "precio": 750,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 13,
+        "nombre": "Producto 13", 
+        "detalle": "Detalle producto 13", 
+        "stock": 9,
+        "precio": 1800,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 14,
+        "nombre": "Producto 14", 
+        "detalle": "Detalle producto 14", 
+        "stock": 20,
+        "precio": 500,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 15,
+        "nombre": "Producto 15", 
+        "detalle": "Detalle producto 15", 
+        "stock": 10,
+        "precio": 3000,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 16,
+        "nombre": "Producto 16", 
+        "detalle": "Detalle producto 16", 
+        "stock": 16,
+        "precio": 1600,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 17,
+        "nombre": "Producto 17", 
+        "detalle": "Detalle producto 17", 
+        "stock": 7,
+        "precio": 4300,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 18,
+        "nombre": "Producto 18", 
+        "detalle": "Detalle producto 18", 
+        "stock": 13,
+        "precio": 1500,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 19,
+        "nombre": "Producto 19", 
+        "detalle": "Detalle producto 19", 
+        "stock": 15,
+        "precio": 800,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 20,
+        "nombre": "Producto 20", 
+        "detalle": "Detalle producto 20", 
+        "stock": 2,
+        "precio": 14500,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 21,
+        "nombre": "Producto 21", 
+        "detalle": "Detalle producto 21", 
+        "stock": 4,
+        "precio": 13200,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 22,
+        "nombre": "Producto 22", 
+        "detalle": "Detalle producto 22", 
+        "stock": 5,
+        "precio": 4600,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 23,
+        "nombre": "Producto 23", 
+        "detalle": "Detalle producto 23", 
+        "stock": 16,
+        "precio": 2800,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 24,
+        "nombre": "Producto 24", 
+        "detalle": "Detalle producto 24", 
+        "stock": 12,
+        "precio": 3000,
+        "img": "https://via.placeholder.com/300"
+    },
+    {
+        "codigo": 25,
+        "nombre": "Producto 25", 
+        "detalle": "Detalle producto 25", 
+        "stock": 8,
+        "precio": 5500,
+        "img": "https://via.placeholder.com/300"
+    }
+]

@@ -14,10 +14,16 @@ let claveFija = "1234"
 *********************************/
 const divProductos = document.querySelector("#productos")
 const divCarrito = document.querySelector("#carrito")
-const search = document.querySelector("#search")
 const totalCarrito = document.querySelector("#total")
 const divCompra = document.querySelector("#compra")
 const btnComprar = document.createElement("button")
+const ver = document.getElementById("ver")
+const verCarrito = document.querySelector("#verCarrito")
+const search = document.querySelector("#search")
+const chkNombre = document.querySelector("#chkNombre")
+const chkDetalle = document.querySelector("#chkDetalle")
+const ordMayor = document.querySelector("#mayorPrecio")
+const ordMenor = document.querySelector("#menorPrecio")
 
 /*********************************
 *** Declaración de objetos
@@ -28,10 +34,9 @@ class clsProducto {
         this.nombre = nombre.toUpperCase();
         this.detalle = detalle;
         this.stock = stock;
-        //this.precio = precio;
         this.precio = precio == "" || precio == 0 ? precio = 0 : precio;
-        //this.img = "img/" + img;
-        img == "" ? this.img = "https://via.placeholder.com/150" : this.img = "img/" + img;
+        this.img = img;
+        //img == "" || img === "https://via.placeholder.com/300" ? this.img = "https://via.placeholder.com/300" : this.img = img;
     }
 
     verStock(){
@@ -68,19 +73,6 @@ class clsCarrito {
     }
 }
 
-/*********************************
-*** carga inicial
-*********************************/
-arrProductos.push(new clsProducto("Maceta diseño", 'Macetas de cemento con diseño', 40, 3200,"maceta_cemento_diseno.png"));
-arrProductos.push(new clsProducto("Maceta cemento", 'Macetas de cemento clásica', 50, 2500,"maceta_cemento.png"));
-arrProductos.push(new clsProducto("Vela madera 35mm", 'vela en cuenco de madera de 35mm de diametro.', 25, 3900,"vela_cuenco_madera_35mm.png"));
-arrProductos.push(new clsProducto("Vela lata 35mm",   'vela en cuenco de lata de 35mm de altura.',   37, 3500,"vela_lata_35mm.jpg"));
-arrProductos.push(new clsProducto("Vela lata 50mm",   'vela en cuenco de lata de 50mm de diametro.',   48, 4200,"vela_lata_50mm.png"));
-arrProductos.push(new clsProducto("Vela lata 60mm",  'vela en cuenco de lata de 60mm de diametro.',  33, 5800,"vela_lata_60mm.png"));
-arrProductos.push(new clsProducto("Vela vidrio redonda", 'vela en cuenco de vidrio redonda de 35mm de diametro.', 60, 3100,"vela_vidrio_redonda.jpeg"));
-arrProductos.push(new clsProducto("Vela vidrio madera", 'vela en cuenco de vidrio de 50mm de diametro con tapa de madera.', 80, 3500,"vela_vidrio_tapa.png"));
-
-
 
 /*********************************
 *** Funciones de productos
@@ -113,13 +105,28 @@ function renderProductos (arr){
         miProdBoton.textContent = '+';
         miProdBoton.setAttribute('marcador', prd.codigo);
         miProdBoton.addEventListener('click', anyadirProductoAlCarrito);
+
+/*        const miCantCarrito = document.createElement('div')
+        miCantCarrito.classList.add('card-footer')
+        const prodEnCarrito = document.createElement('small')
+        prodEnCarrito.classList.add('text-body-secondary')
+        prodEnCarrito.textContent = ``
+
+/*
+<div class="card-footer">
+        <small class="text-body-secondary">Last updated 3 mins ago</small>
+      </div>
+*/
+
         // Insertamos
-        miProdCardBody.appendChild(miProdImagen);
-        miProdCardBody.appendChild(miProdTitle);
-        miProdCardBody.appendChild(miProdPrecio);
-        miProdCardBody.appendChild(miProdBoton);
-        miProd.appendChild(miProdCardBody);
-        divProductos.appendChild(miProd);
+        miProdCardBody.appendChild(miProdImagen)
+        miProdCardBody.appendChild(miProdTitle)
+        miProdCardBody.appendChild(miProdPrecio)
+        miProdCardBody.appendChild(miProdBoton)
+        // miCantCarrito.appendChild(prodEnCarrito)
+        // miProdCardBody.appendChild(miCantCarrito)
+        miProd.appendChild(miProdCardBody)
+        divProductos.appendChild(miProd)
     });
 }
 // Función para agregar productos al carrito
@@ -136,9 +143,15 @@ function anyadirProductoAlCarrito(evento){
             });
             //encontrado.agregar();
             encontrado.cantidad += 1
+            //<small class="text-body-secondary">Last updated 3 mins ago</small>
+            // const prodEnCarrito = document.get
+            // prodEnCarrito.classList.add('text-body-secondary')
+            // prodEnCarrito.textContent = `Producto/s en carrito: ${encontrado.cantidad}`
+
         } else {
             arrCarrito.push(new clsCarrito(newProdId, 1))
         }
+
     } else {
         arrCarrito.push(new clsCarrito(newProdId, 1))
     }
@@ -155,33 +168,36 @@ function renderCarrito () {
     divCompra.textContent = ""
     totalCarrito.textContent = ""
     
+    
     arrCarrito.forEach((carrito) => {
-        let nombreObjeto;
-        let objNombre = arrProductos.find(obj => obj.codigo === carrito.codigo);
+        let nombreObjeto
+        let objNombre = arrProductos.find(obj => obj.codigo === carrito.codigo)
         if (objNombre) {
             nombreObjeto = objNombre.nombre;
         }
 
         const miEstructura = document.createElement("li")
-        miEstructura.classList.add('list-group-item', 'text-right', 'mx-2');
+        miEstructura.classList.add('list-group-item', 'text-right', 'my-2')
         miEstructura.textContent = `${carrito.codigo} - ` + nombreObjeto + ` x ${carrito.cantidad}`
 
         const quitarProd = document.createElement("button")
-        quitarProd.classList.add("btn", "btn-secondary", "mx-5")
-        quitarProd.textContent = " - "
+        quitarProd.classList.add("btn", 'btn-outline-danger', 'btn-sm')
+        quitarProd.textContent = "-"
         quitarProd.style.marginLeft = '5px';
         quitarProd.setAttribute ("codigo", carrito.codigo)
         quitarProd.addEventListener("click", quitarProducto)
         
         //miEstructura.appendChild(prod)
         miEstructura.appendChild(quitarProd)
-        divCarrito.appendChild(miEstructura);
-        
-        
+        divCarrito.appendChild(miEstructura)
     })
+
     guardarLS(arrCarrito)
 
     if (arrCarrito.length>0){
+        verCarrito.style.display = "flex"
+        verCarrito.classList.add("col-3")
+        
         const clearCarrito = document.createElement("button")
         clearCarrito.classList.add("btn", "btn-danger", "m-2")
         clearCarrito.textContent = "Vaciar carrito"
@@ -194,10 +210,12 @@ function renderCarrito () {
         btnComprar.textContent = "Realizar Compra"
         btnComprar.addEventListener("click", realizarCompra)
         divCompra.appendChild(btnComprar)
+
+        totalCarrito.textContent = calcularTotal()    
+    } else {
+        verCarrito.style.display = "none"
+        verCarrito.classList.remove("col-3")
     }
-
-    totalCarrito.textContent = calcularTotal()
-
 
 }
 
@@ -234,9 +252,9 @@ function vaciarCarrito (){
 }
 
 
-/**
+/*********************************
  * Calcula el precio total teniendo en cuenta los productos repetidos
-**/
+*********************************/
 function calcularTotal() {
     // Recorremos el array del carrito 
     return arrCarrito.reduce((total, item) => {
@@ -250,9 +268,9 @@ function calcularTotal() {
 }
 
 
-/**
+/*********************************
  * Función de compra
-**/
+*********************************/
 let realizarCompra = () => {
     Swal.fire({
         title: 'Seguro quieres finalizar la compra?',
@@ -262,16 +280,16 @@ let realizarCompra = () => {
         denyButtonText: `Seguir eligiendo`,
       }).then((result) => {
         if (result.isConfirmed) {
+            vaciarCarrito();
           Swal.fire('Su compra fue realizada con exito!', '', 'success')
-
         } else if (result.isDenied) {
           Swal.fire('Serás redirigido nuevamente a la tienda!', '', 'warning')
 }})
 }
 
-/**
+/*********************************
  * LocalStorage
-**/
+*********************************/
 function guardarLS(arr) {
     localStorage.setItem("carrito", JSON.stringify(arr));
 }
@@ -293,54 +311,64 @@ function filtrar(arr, params, filtro) {
         return el.codigo == filtro;
     } else if (params === "nombre") {
         return el["nombre"].includes(filtro);
+    } else if (params === "detalle") {
+
+        const detalleEnMayusculas = el["detalle"].toUpperCase();
+        return detalleEnMayusculas.includes(filtro);
+
+        //return el["detalle"].includes(filtro);
     }
   });
 }
 
+// ordenar
+function ordenar(arr, ord) {
+    if (ord === 1){
+        return arr.sort((a, b)=> b.precio - a.precio)
+    } else if (ord === 0) {
+        return arr.sort((a, b)=> a.precio - b.precio)
+    }
+}
 
 
 /*********************************
-*** Inicio de logica
+*** carga inicial
 *********************************/
-//alert("Bienvenido a BeraDeco. \nSeleccione los productos luego ingrese su clave para comprar.")
-
-renderProductos(arrProductos)
 
 if(localStorage.getItem("carrito")){
     arrCarrito = JSON.parse(localStorage.getItem("carrito"))
 }
 
-renderCarrito()
+fetch('./data/db.json')
+    .then(response=>response.json())
+    .then(data=>{
+        data.forEach((prd)=>{
+            arrProductos.push(new clsProducto(prd.nombre, prd.detalle, prd.stock, prd.precio, prd.img));
+        })
+        renderProductos(data)
+        renderCarrito()
+})
+
 
 //Listeners de búsqueda
+let tipoFiltro
 search.addEventListener("input", () => {
-    let nuevoFiltro = filtrar(arrProductos, "nombre", search.value.toUpperCase())
+    if (chkNombre.checked){
+        tipoFiltro = "nombre"
+    } else if (chkDetalle.checked){
+        tipoFiltro = "detalle"
+    }
+    let nuevoFiltro = filtrar(arrProductos, tipoFiltro, search.value.toUpperCase())
     renderProductos(nuevoFiltro)
 });
 
+ordMayor.addEventListener("click", () => {
+    let nuevoFiltro = ordenar(arrProductos, 1)
+    renderProductos(nuevoFiltro)
+})
 
-/*
-cargarProductos()
-//console.log(filtrar(vProductos, "MADERA", "nombre"));
+ordMenor.addEventListener("click", () => {
+    let nuevoFiltro = ordenar(arrProductos, 0)
+    renderProductos(nuevoFiltro)
+})
 
-// Realización de la compra con clave
-hacerCompra = parseInt(prompt("Desea realizar la compra: \n 1. Comprar \n 2.Cancelar"))
-if (hacerCompra === 1) {
-    for (let x=3; x>0; x--){
-        let clave = prompt("ingrese su clave. Tiene "+ x +" oportunidades")
-        if (clave === claveFija){
-            console.log("Realizaste la compra de \n")
-            verCarrito(vCarrito)
-            console.log("Gracias por su compra!")
-            break
-        }else{
-            alert("Clave incorrecta!!")
-            if(x==1){
-                alert("La compra fue cancelada")
-            }
-        }
-    }
-} else {
-    alert("Compra cancelada")
-}
-*/
