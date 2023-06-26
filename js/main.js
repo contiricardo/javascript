@@ -16,14 +16,18 @@ const divProductos = document.querySelector("#productos")
 const divCarrito = document.querySelector("#carrito")
 const totalCarrito = document.querySelector("#total")
 const divCompra = document.querySelector("#compra")
-const btnComprar = document.createElement("button")
-const ver = document.getElementById("ver")
+// const btnComprar = document.createElement("button")
+const btnComprarSwal = document.querySelector("#btnComprarSwal")
+const compraCarrito = document.querySelector("#compraCarrito")
+//const ver = document.getElementById("ver")
 const verCarrito = document.querySelector("#verCarrito")
+// items de busqueda
 const search = document.querySelector("#search")
 const chkNombre = document.querySelector("#chkNombre")
 const chkDetalle = document.querySelector("#chkDetalle")
 const ordMayor = document.querySelector("#mayorPrecio")
 const ordMenor = document.querySelector("#menorPrecio")
+const estadoCarrito = document.querySelector("#estadoCarrito")
 
 /*********************************
 *** Declaración de objetos
@@ -81,52 +85,87 @@ function renderProductos (arr){
     divProductos.innerHTML = ""
 
     arr.forEach((prd) => {
-        // Estructura
-        const miProd = document.createElement('div');
-        miProd.classList.add('card', 'col-md-4', 'col-sm-6');
+        // // Estructura
+        // const miProd = document.createElement('div');
+        // miProd.classList.add('card', 'col-md-3', 'col-sm-4');
+        // // Caja
+        // const miProdCardBody = document.createElement('div');
+        // miProdCardBody.classList.add('card-body');
+        // // Imagen
+        // const miProdImagen = document.createElement('img');
+        // miProdImagen.classList.add('img-fluid');
+        // miProdImagen.setAttribute('src', prd.img);
+        // // Titulo
+        // const miProdTitle = document.createElement('h5');
+        // miProdTitle.classList.add('card-title');
+        // miProdTitle.textContent = prd.nombre;
+        // // Precio
+        // const miProdPrecio = document.createElement('p');
+        // miProdPrecio.classList.add('card-text');
+        // miProdPrecio.textContent = `$ ${prd.precio}`;
+        // // Boton 
+        // const miProdBoton = document.createElement('button');
+        // miProdBoton.classList.add('btn', 'btn-primary');
+        // miProdBoton.textContent = '+';
+        // miProdBoton.setAttribute('marcador', prd.codigo);
+        // miProdBoton.addEventListener('click', anyadirProductoAlCarrito);
+
+        // // Insertamos
+        // miProdCardBody.appendChild(miProdImagen)
+        // miProdCardBody.appendChild(miProdTitle)
+        // miProdCardBody.appendChild(miProdPrecio)
+        // miProdCardBody.appendChild(miProdBoton)
+        // miProd.appendChild(miProdCardBody)
+        // divProductos.appendChild(miProd)
+
+
+        
         // Caja
-        const miProdCardBody = document.createElement('div');
-        miProdCardBody.classList.add('card-body');
+        const vBloque = document.createElement('div')
+        vBloque.classList.add('col')
+        // Caja
+        const vCaja = document.createElement('div')
+        vCaja.classList.add('card', 'h-100')
         // Imagen
-        const miProdImagen = document.createElement('img');
-        miProdImagen.classList.add('img-fluid');
-        miProdImagen.setAttribute('src', prd.img);
-        // Titulo
-        const miProdTitle = document.createElement('h5');
-        miProdTitle.classList.add('card-title');
-        miProdTitle.textContent = prd.nombre;
+        const vImagen = document.createElement('img');
+        vImagen.classList.add('card-img-top');
+        vImagen.setAttribute('src', prd.img)
+
+        // Contenido de información del producto
+        const vInfoProd = document.createElement('div')
+        vInfoProd.classList.add('card-body')
+        // Nombre del producto
+        const vTituloProd = document.createElement('h5');
+        vTituloProd.classList.add('card-title');
+        vTituloProd.textContent = prd.nombre;
+        // Detalle del producto
+        const vDetalleProd = document.createElement('p')
+        vDetalleProd.classList.add('card-text', 'fs-6', 'fw-light')
+        vDetalleProd.textContent = prd.detalle
+        // Contenedor
+        const vPrecioBoton = document.createElement('div')
+        vPrecioBoton.classList.add('d-flex','justify-content-evenly', 'mb-3')
         // Precio
-        const miProdPrecio = document.createElement('p');
-        miProdPrecio.classList.add('card-text');
-        miProdPrecio.textContent = `$ ${prd.precio}`;
+        const vPrecioProd = document.createElement('p')
+        vPrecioProd.classList.add('card-text','fs-5', 'fw-normal')
+        vPrecioProd.textContent = `$ ${prd.precio}`
         // Boton 
-        const miProdBoton = document.createElement('button');
-        miProdBoton.classList.add('btn', 'btn-primary');
-        miProdBoton.textContent = '+';
-        miProdBoton.setAttribute('marcador', prd.codigo);
-        miProdBoton.addEventListener('click', anyadirProductoAlCarrito);
+        const vBotonAgregar = document.createElement('button')
+        vBotonAgregar.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'fw-bolder')
+        vBotonAgregar.textContent = 'Agregar'
+        vBotonAgregar.setAttribute('marcador', prd.codigo)
+        vBotonAgregar.addEventListener('click', anyadirProductoAlCarrito)
 
-/*        const miCantCarrito = document.createElement('div')
-        miCantCarrito.classList.add('card-footer')
-        const prodEnCarrito = document.createElement('small')
-        prodEnCarrito.classList.add('text-body-secondary')
-        prodEnCarrito.textContent = ``
-
-/*
-<div class="card-footer">
-        <small class="text-body-secondary">Last updated 3 mins ago</small>
-      </div>
-*/
-
-        // Insertamos
-        miProdCardBody.appendChild(miProdImagen)
-        miProdCardBody.appendChild(miProdTitle)
-        miProdCardBody.appendChild(miProdPrecio)
-        miProdCardBody.appendChild(miProdBoton)
-        // miCantCarrito.appendChild(prodEnCarrito)
-        // miProdCardBody.appendChild(miCantCarrito)
-        miProd.appendChild(miProdCardBody)
-        divProductos.appendChild(miProd)
+        // Agregar producto a la vista
+        vInfoProd.appendChild(vTituloProd)
+        vInfoProd.appendChild(vDetalleProd)
+        vPrecioBoton.appendChild(vBotonAgregar)
+        vPrecioBoton.appendChild(vPrecioProd)
+        vCaja.appendChild(vImagen)
+        vCaja.appendChild(vInfoProd)
+        vCaja.appendChild(vPrecioBoton)
+        vBloque.appendChild(vCaja)
+        divProductos.appendChild(vBloque)
     });
 }
 // Función para agregar productos al carrito
@@ -143,10 +182,6 @@ function anyadirProductoAlCarrito(evento){
             });
             //encontrado.agregar();
             encontrado.cantidad += 1
-            //<small class="text-body-secondary">Last updated 3 mins ago</small>
-            // const prodEnCarrito = document.get
-            // prodEnCarrito.classList.add('text-body-secondary')
-            // prodEnCarrito.textContent = `Producto/s en carrito: ${encontrado.cantidad}`
 
         } else {
             arrCarrito.push(new clsCarrito(newProdId, 1))
@@ -165,7 +200,7 @@ function anyadirProductoAlCarrito(evento){
 *********************************/
 function renderCarrito () {
     divCarrito.textContent = ""
-    divCompra.textContent = ""
+    //divCompra.textContent = ""
     totalCarrito.textContent = ""
     
     
@@ -177,27 +212,30 @@ function renderCarrito () {
         }
 
         const miEstructura = document.createElement("li")
-        miEstructura.classList.add('list-group-item', 'text-right', 'my-2')
+        miEstructura.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center')
         miEstructura.textContent = `${carrito.codigo} - ` + nombreObjeto + ` x ${carrito.cantidad}`
 
         const quitarProd = document.createElement("button")
-        quitarProd.classList.add("btn", 'btn-outline-danger', 'btn-sm')
-        quitarProd.textContent = "-"
+        quitarProd.classList.add("btn", 'btn-outline-danger', 'btn-sm', 'justify-content-end')
+        quitarProd.textContent = "Quitar 1"
         quitarProd.style.marginLeft = '5px';
         quitarProd.setAttribute ("codigo", carrito.codigo)
         quitarProd.addEventListener("click", quitarProducto)
         
-        //miEstructura.appendChild(prod)
         miEstructura.appendChild(quitarProd)
         divCarrito.appendChild(miEstructura)
     })
 
     guardarLS(arrCarrito)
+    //arrCarrito.length==0 && estadoCarrito.classList.remove('carritoConProd')
+    if (arrCarrito.length == 0) {
+        estadoCarrito.classList.remove('carritoConProd')
+        compraCarrito.classList.add('disabled')
+    }
 
     if (arrCarrito.length>0){
-        verCarrito.style.display = "flex"
-        verCarrito.classList.add("col-3")
-        
+        verCarrito.style.display = "inline"
+
         const clearCarrito = document.createElement("button")
         clearCarrito.classList.add("btn", "btn-danger", "m-2")
         clearCarrito.textContent = "Vaciar carrito"
@@ -205,16 +243,19 @@ function renderCarrito () {
         divCarrito.appendChild(clearCarrito)
         
         //const btnComprar = document.createElement("button")
-        btnComprar.setAttribute("id","btnComprarSwal")
-        btnComprar.classList.add("btn", "btn-success")
-        btnComprar.textContent = "Realizar Compra"
-        btnComprar.addEventListener("click", realizarCompra)
-        divCompra.appendChild(btnComprar)
+        //btnComprar.setAttribute("id","btnComprarSwal")
+        //btnComprar.classList.add("btn", "btn-success")
+        //btnComprar.textContent = "Realizar Compra"
+        //btnComprar.addEventListener("click", realizarCompra)
+        //divCompra.appendChild(btnComprar)
+        btnComprarSwal.addEventListener("click", realizarCompra)
 
-        totalCarrito.textContent = calcularTotal()    
+        estadoCarrito.classList.add('carritoConProd')
+        compraCarrito.classList.remove('disabled')
+
+        totalCarrito.textContent = calcularTotal()
     } else {
         verCarrito.style.display = "none"
-        verCarrito.classList.remove("col-3")
     }
 
 }
@@ -243,18 +284,13 @@ function quitarProducto(evento){
     renderCarrito()
 }
 
-
 // Vaciar el carrito
 function vaciarCarrito (){
     arrCarrito.length = 0
-    
     renderCarrito()
 }
 
-
-/*********************************
- * Calcula el precio total teniendo en cuenta los productos repetidos
-*********************************/
+// Calculo de total
 function calcularTotal() {
     // Recorremos el array del carrito 
     return arrCarrito.reduce((total, item) => {
@@ -294,7 +330,6 @@ function guardarLS(arr) {
     localStorage.setItem("carrito", JSON.stringify(arr));
 }
 
- 
 
 /*********************************
 *** Filtros
@@ -312,11 +347,8 @@ function filtrar(arr, params, filtro) {
     } else if (params === "nombre") {
         return el["nombre"].includes(filtro);
     } else if (params === "detalle") {
-
         const detalleEnMayusculas = el["detalle"].toUpperCase();
         return detalleEnMayusculas.includes(filtro);
-
-        //return el["detalle"].includes(filtro);
     }
   });
 }
@@ -327,7 +359,32 @@ function ordenar(arr, ord) {
         return arr.sort((a, b)=> b.precio - a.precio)
     } else if (ord === 0) {
         return arr.sort((a, b)=> a.precio - b.precio)
+    } else if (ord === 3) {
+        return arr.sort((a, b)=> {
+            const nombreA = a.nombre.toUpperCase()
+            const nombreB = b.nombre.toUpperCase()
+            if (nombreA < nombreB){
+                return -1
+            }
+            if (nombreA > nombreB){
+                return 1
+            }
+            return 0
+        })
+    } else if (ord === 4) {
+        return arr.sort((a, b)=> {
+            const detalleA = a.detalle.toUpperCase()
+            const detalleB = b.detalle.toUpperCase()
+            if (detalleA < detalleB){
+                return -1
+            }
+            if (detalleA > detalleB){
+                return 1
+            }
+            return 0
+        })
     }
+
 }
 
 
@@ -352,6 +409,30 @@ fetch('./data/db.json')
 
 //Listeners de búsqueda
 let tipoFiltro
+chkNombre.addEventListener("click", () => {
+    let nuevoFiltro = ordenar(arrProductos, 3)
+    search.value = ''
+    renderProductos(nuevoFiltro)
+})
+
+chkDetalle.addEventListener("click", () => {
+    let nuevoFiltro = ordenar(arrProductos, 4)
+    search.value = ''
+    renderProductos(nuevoFiltro)
+})
+
+ordMayor.addEventListener("click", () => {
+    let nuevoFiltro = ordenar(arrProductos, 1)
+    search.value = ''
+    renderProductos(nuevoFiltro)
+})
+
+ordMenor.addEventListener("click", () => {
+    let nuevoFiltro = ordenar(arrProductos, 0)
+    search.value = ''
+    renderProductos(nuevoFiltro)
+})
+
 search.addEventListener("input", () => {
     if (chkNombre.checked){
         tipoFiltro = "nombre"
@@ -362,13 +443,6 @@ search.addEventListener("input", () => {
     renderProductos(nuevoFiltro)
 });
 
-ordMayor.addEventListener("click", () => {
-    let nuevoFiltro = ordenar(arrProductos, 1)
-    renderProductos(nuevoFiltro)
+compraCarrito.addEventListener("click", ()=>{
+    renderCarrito()
 })
-
-ordMenor.addEventListener("click", () => {
-    let nuevoFiltro = ordenar(arrProductos, 0)
-    renderProductos(nuevoFiltro)
-})
-

@@ -35,7 +35,13 @@ section{
     color: white;
 }
 
-#verCarrito {
-    display: flex;
-    flex-direction: column;
+/* #verCarrito {
+    display: inline;
+    flex-direction: row;
+} */
+
+.carritoConProd {
+    color: green;
+    background-color: hsl(147, 50%, 83%);
+    border-radius: 10px;
 }
