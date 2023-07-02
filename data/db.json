@@ -3,7 +3,7 @@
         "codigo": 1,
         "nombre": "Maceta diseño", 
         "detalle": "Macetas de cemento con diseño", 
-        "stock": 40,
+        "stock": 3,
         "precio": 3200,
         "img": "./img/maceta_cemento_diseno.png"
     },
@@ -11,7 +11,7 @@
         "codigo": 2,
         "nombre": "Maceta cemento", 
         "detalle": "Macetas de cemento clásica", 
-        "stock": 50,
+        "stock": 5,
         "precio": 2500,
         "img": "./img/maceta_cemento.png"
     },
@@ -19,7 +19,7 @@
         "codigo": 3,
         "nombre": "Vela madera 35mm", 
         "detalle": "vela en cuenco de madera de 35mm de diametro.", 
-        "stock": 25,
+        "stock": 10,
         "precio": 3900,
         "img": "./img/vela_cuenco_madera_35mm.png"
     },
@@ -43,7 +43,7 @@
         "codigo": 6,
         "nombre": "Vela lata 60mm",  
         "detalle": "vela en cuenco de lata de 60mm de diametro.", 
-        "stock": 33,
+        "stock": 4,
         "precio": 5800,
         "img": "./img/vela_lata_60mm.png"
     },
@@ -51,7 +51,7 @@
         "codigo": 7,
         "nombre": "Vela vidrio redonda", 
         "detalle": "vela en cuenco de vidrio redonda de 35mm de diametro.", 
-        "stock": 60,
+        "stock": 3,
         "precio": 3100,
         "img": "./img/vela_vidrio_redonda.jpeg"
     },
@@ -65,138 +65,98 @@
     },
     {
         "codigo": 9,
-        "nombre": "Producto 9", 
-        "detalle": "Detalle producto 9", 
-        "stock": 8,
+        "nombre": "Globo terraquio", 
+        "detalle": "Globo terraquio liso", 
+        "stock": 2,
         "precio": 2500,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1563219996-45f1a0ba692e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
     },
     {
         "codigo": 10,
-        "nombre": "Producto 10", 
-        "detalle": "Detalle producto 10", 
+        "nombre": "Contenedor madera", 
+        "detalle": "Decoración de madera", 
         "stock": 8,
         "precio": 3100,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
     },
     {
         "codigo": 11,
-        "nombre": "Producto 11", 
-        "detalle": "Detalle producto 11", 
+        "nombre": "Maceta blanca", 
+        "detalle": "Maceta grande blanca", 
         "stock": 11,
         "precio": 1200,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     },
     {
         "codigo": 12,
-        "nombre": "Producto 12", 
-        "detalle": "Detalle producto 12", 
+        "nombre": "Cemento natural", 
+        "detalle": "Maceta de cemento natural con bisel", 
         "stock": 14,
         "precio": 750,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1523575708161-ad0fc2a9b951?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
     },
     {
         "codigo": 13,
-        "nombre": "Producto 13", 
-        "detalle": "Detalle producto 13", 
+        "nombre": "Jarrito bicolor", 
+        "detalle": "Jarrito de dos colores en crudo y verde", 
         "stock": 9,
         "precio": 1800,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1515877717189-fe435f7b59aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     },
     {
         "codigo": 14,
-        "nombre": "Producto 14", 
-        "detalle": "Detalle producto 14", 
+        "nombre": "Posaplato", 
+        "detalle": "Posaplato de hilo tejido", 
         "stock": 20,
         "precio": 500,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1512972972907-6d71529c5e92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
     },
     {
         "codigo": 15,
-        "nombre": "Producto 15", 
-        "detalle": "Detalle producto 15", 
+        "nombre": "Tonel de madera", 
+        "detalle": "Tonel porta lapicera o decorador de madera", 
         "stock": 10,
         "precio": 3000,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1584589167171-541ce45f1eea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     },
     {
         "codigo": 16,
-        "nombre": "Producto 16", 
-        "detalle": "Detalle producto 16", 
+        "nombre": "Decorador arbolitos", 
+        "detalle": "Decoración con arboles pequeños para escritorio", 
         "stock": 16,
         "precio": 1600,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1608892236892-ab98c047f498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     },
     {
         "codigo": 17,
-        "nombre": "Producto 17", 
-        "detalle": "Detalle producto 17", 
+        "nombre": "Cuadro floral", 
+        "detalle": "Cuadro floral colores fuertes", 
         "stock": 7,
         "precio": 4300,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1509744645300-a2098b11871a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
     },
     {
         "codigo": 18,
-        "nombre": "Producto 18", 
-        "detalle": "Detalle producto 18", 
+        "nombre": "Jarron barro", 
+        "detalle": "Jarron de barro para flores secas", 
         "stock": 13,
         "precio": 1500,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80"
     },
     {
         "codigo": 19,
-        "nombre": "Producto 19", 
-        "detalle": "Detalle producto 19", 
+        "nombre": "Frasco vidrio oscuro", 
+        "detalle": "Frasco de vidrio templado negro", 
         "stock": 15,
         "precio": 800,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1623244307563-f9ade3df13c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     },
     {
         "codigo": 20,
-        "nombre": "Producto 20", 
-        "detalle": "Detalle producto 20", 
+        "nombre": "Almohadones", 
+        "detalle": "Almohadones varios diseños", 
         "stock": 2,
         "precio": 14500,
-        "img": "https://via.placeholder.com/300"
-    },
-    {
-        "codigo": 21,
-        "nombre": "Producto 21", 
-        "detalle": "Detalle producto 21", 
-        "stock": 4,
-        "precio": 13200,
-        "img": "https://via.placeholder.com/300"
-    },
-    {
-        "codigo": 22,
-        "nombre": "Producto 22", 
-        "detalle": "Detalle producto 22", 
-        "stock": 5,
-        "precio": 4600,
-        "img": "https://via.placeholder.com/300"
-    },
-    {
-        "codigo": 23,
-        "nombre": "Producto 23", 
-        "detalle": "Detalle producto 23", 
-        "stock": 16,
-        "precio": 2800,
-        "img": "https://via.placeholder.com/300"
-    },
-    {
-        "codigo": 24,
-        "nombre": "Producto 24", 
-        "detalle": "Detalle producto 24", 
-        "stock": 12,
-        "precio": 3000,
-        "img": "https://via.placeholder.com/300"
-    },
-    {
-        "codigo": 25,
-        "nombre": "Producto 25", 
-        "detalle": "Detalle producto 25", 
-        "stock": 8,
-        "precio": 5500,
-        "img": "https://via.placeholder.com/300"
+        "img": "https://images.unsplash.com/photo-1538577880403-f9998e75dd06?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
     }
 ]
